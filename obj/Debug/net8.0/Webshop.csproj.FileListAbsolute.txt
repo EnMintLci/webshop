@@ -138,3 +138,4 @@ C:\Users\lenovo\source\repos\Webshop\Webshop\bin\Debug\net8.0\runtimes\win\lib\n
 C:\Users\lenovo\source\repos\Webshop\Webshop\obj\Debug\net8.0\Webshop.csproj.AssemblyReference.cache
 C:\Users\lenovo\source\repos\Webshop\Webshop\obj\Debug\net8.0\Webshop.csproj.Up2Date
 C:\Users\lenovo\source\repos\Webshop\Webshop\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\lenovo\source\repos\Webshop\Webshop\obj\Debug\net8.0\Webshop.sourcelink.json

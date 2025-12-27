@@ -1,1 +1,21 @@
-﻿
+﻿# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+
+# Build Folders
+bin/
+obj/
+
+# EF Migrations
+Migrations/
+
+# Rider
+.idea/
+
+# User Secrets
+appsettings.Development.json
+
+# Logs
+*.log

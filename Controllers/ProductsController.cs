@@ -18,22 +18,66 @@ namespace Webshop.Controllers
             var products = _context.Products.ToList();
             return View(products);
         }
+        // CREATE (GET)
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /Products/Create
+        // CREATE (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product product)
+        public IActionResult Create(Product product)
         {
             if (!ModelState.IsValid)
                 return View(product);
 
             _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // EDIT (GET)
+        public IActionResult Edit(int id)
+        {
+            var product = _context.Products.Find(id);
+            if (product == null) return NotFound();
+            return View(product);
+        }
+
+        // EDIT (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Product product)
+        {
+            if (!ModelState.IsValid)
+                return View(product);
+
+            _context.Products.Update(product);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // DELETE (GET)
+        public IActionResult Delete(int id)
+        {
+            var product = _context.Products.Find(id);
+            if (product == null) return NotFound();
+            return View(product);
+        }
+
+        // DELETE (POST)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var product = _context.Products.Find(id);
+            if (product == null) return NotFound();
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
     }
 }
+
