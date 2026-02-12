@@ -2,33 +2,48 @@
 
 <h1>Products</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row g-4">
+    @foreach (var product in Model)
+    {
+		<div class="col-sm-6 col-md-4 col-lg-3">
+            <a asp-controller="Products"
+               asp-action="ViewProduct"
+               asp-route-id="@product.Id"
+               class="text-decoration-none text-dark">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Size</th>
-            <th>Sex</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Price</td>
-                <td>@item.Size</td>
-                <td>@item.Sex</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+				<div class="card product-card">
+					
+
+						@{
+							string imageSrc = "/images/products/no_image.jpg";
+
+							if (!string.IsNullOrWhiteSpace(product.ImageUrls))
+							{
+								var firstImage = product.ImageUrls.Split(";;").FirstOrDefault();
+								if (!string.IsNullOrWhiteSpace(firstImage))
+								{
+									imageSrc = "/images/products/" + firstImage;
+								}
+							}
+						}
+
+						<img src="@imageSrc"
+							 class="product-card-img"
+							 alt="@product.Name"
+							  />
+
+
+						<div class="card-body">
+							<h5 class="card-title">@product.Name</h5>
+							<p class="card-text">@product.Price Ft</p>
+						</div>
+					
+                </div>
+
+            </a>
+            
+        </div>
+    }
+</div>
+
+

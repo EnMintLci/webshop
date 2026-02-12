@@ -1,0 +1,159 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Webshop.Data;
+using Webshop.Models;
+
+[Authorize(Roles = "Admin")]
+[Route("Admin/Products")]
+public class AdminProductsController : Controller
+{
+    private readonly AppDbContext _context;
+
+    public AdminProductsController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    // GET: /Admin/Products
+    [HttpGet("")]
+    public IActionResult Index()
+    {
+        return View(_context.Products.ToList());
+    }
+
+    // GET: /Admin/Products/Create
+    [HttpGet("Create")]
+    public IActionResult Create()
+    {
+        var vm = new ProductVM();
+
+        foreach (Size size in Enum.GetValues(typeof(Size)))
+            vm.Stock[size] = 0;
+
+        return View(vm);
+    }
+
+    // POST: /Admin/Products/Create
+    [HttpPost("Create")]
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(Product product)
+    {
+        if (!ModelState.IsValid)
+            return View(product);
+
+        _context.Products.Add(product);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+    // GET: /Admin/Products/Edit/5
+    [HttpGet("Edit/{id}")]
+    public IActionResult Edit(int id)
+    {
+        var product = _context.Products
+            .Include(p => p.Stocks)
+            .FirstOrDefault(p => p.Id == id);
+
+        if (product == null) return NotFound();
+
+        var vm = new ProductVM
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Sex = product.Sex,
+            ImageUrls = product.ImageUrls
+        };
+
+        foreach (Size size in Enum.GetValues(typeof(Size)))
+        {
+            vm.Stock[size] =
+                product.Stocks.FirstOrDefault(s => s.Size == size)?.Quantity ?? 0;
+        }
+
+        return View(vm);
+    }
+
+
+
+    [HttpPost("Edit/{id}")]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(Product product)
+    {
+        if (!ModelState.IsValid)
+            return View(product);
+
+        _context.Products.Update(product);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+
+    // GET: /Admin/Products/Delete/5
+    [HttpGet("Delete/{id}")]
+    public IActionResult Delete(int id)
+    {
+        var product = _context.Products.Find(id);
+        if (product == null) return NotFound();
+        return View(product);
+    }
+
+    // POST: /Admin/Products/Delete/5
+    [HttpPost("Delete/{id}")]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteConfirmed(int id)
+    {
+        var product = _context.Products.Find(id);
+        if (product == null) return NotFound();
+
+        _context.Products.Remove(product);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Save(ProductVM vm)
+    {
+        if (!ModelState.IsValid)
+            return View(vm.Id == 0 ? "Create" : "Edit", vm);
+
+        Product product;
+
+        if (vm.Id == 0)
+        {
+            // CREATE
+            product = new Product();
+            _context.Products.Add(product);
+        }
+        else
+        {
+            // EDIT
+            product = _context.Products
+                .Include(p => p.Stocks)
+                .First(p => p.Id == vm.Id);
+        }
+
+        // map VM → entity
+        product.Name = vm.Name;
+        product.Price = vm.Price;
+        product.Sex = vm.Sex;
+        product.ImageUrls = vm.ImageUrls;
+
+        // stock sync (simple version)
+        product.Stocks.Clear();
+        foreach (var kv in vm.Stock)
+        {
+            product.Stocks.Add(new ProductStock
+            {
+                Size = kv.Key,
+                Quantity = kv.Value
+            });
+        }
+
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+}
+

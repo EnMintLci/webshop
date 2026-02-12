@@ -1,0 +1,7 @@
+﻿body {
+}
+.product-card-img {
+    height: 30px; 
+    object-fit: cover;
+    width: 200%;
+}

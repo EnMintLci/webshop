@@ -1,7 +1,7 @@
-﻿@model Product
+﻿@model ProductVM
 <h2>Create Product</h2>
 
-<form asp-action="Create">
+<form asp-action="Save" method="post">
     <partial name="_ProductForm" model="Model" />
 </form>
 

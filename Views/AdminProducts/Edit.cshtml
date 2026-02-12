@@ -1,7 +1,7 @@
-﻿@model Product
+﻿@model ProductVM
 <h2>Edit Product</h2>
 
-<form asp-action="Edit">
+<form asp-action="Save" method="post">
     <input type="hidden" asp-for="Id" />
     <partial name="_ProductForm" model="Model" />
 </form>

@@ -1,0 +1,19 @@
+﻿@model Webshop.Models.Product
+@*
+    
+    <
+*@
+@{
+}
+<p>@Model.Name</p>
+<p>@Model.Price</p>
+@* <p>@Model.Size</p> *@
+<p>@Model.Sex</p>
+@if (Model.Stocks.Any(s => s.Quantity > 0))
+{
+    <span class="badge bg-success">In stock</span>
+}
+else
+{
+    <span class="badge bg-danger">Out of stock</span>
+}

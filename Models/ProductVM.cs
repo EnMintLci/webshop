@@ -1,6 +1,6 @@
 ﻿namespace Webshop.Models
 {
-    public class Product
+    public class ProductVM
     {
         public int Id { get; set; }
 
@@ -12,17 +12,8 @@
 
         public string? ImageUrls { get; set; }
 
-        public ICollection<ProductStock> Stocks { get; set; } = new List<ProductStock>();
+        // 👇 size → quantity
+        public Dictionary<Size, int> Stock { get; set; } = new();
     }
 
-    public enum Size
-    {
-        XS, S, M, L, XL, XXL
-    }
-    public enum Sex
-    {
-        Male,
-        Female,
-        Unisex
-    }
 }

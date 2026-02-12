@@ -5,12 +5,28 @@
       "PackagePath": "staticwebassets\\Webshop.ptfmmjftko.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\css\\product_index.css",
+      "PackagePath": "staticwebassets\\css\\product_index.css"
+    },
+    {
       "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\images\\products\\labpic.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\labpic.jpg"
+    },
+    {
+      "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\images\\products\\no_image.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\no_image.jpg"
+    },
+    {
+      "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\images\\products\\olddrawing1.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\olddrawing1.jpg"
     },
     {
       "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\js\\site.js",
