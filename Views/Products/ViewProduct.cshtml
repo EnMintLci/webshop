@@ -5,15 +5,90 @@
 *@
 @{
 }
-<p>@Model.Name</p>
-<p>@Model.Price</p>
-@* <p>@Model.Size</p> *@
-<p>@Model.Sex</p>
-@if (Model.Stocks.Any(s => s.Quantity > 0))
-{
-    <span class="badge bg-success">In stock</span>
-}
-else
-{
-    <span class="badge bg-danger">Out of stock</span>
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container product-page">
+
+    <div class="row g-5">
+
+        <!-- LEFT: images -->
+        <div class="col-md-6">
+            <div class="product-image-viewer">
+
+                <div class="product-image-viewer">
+
+                    @{
+                        var images = Model.ProductImages;
+                        var mainImage = images.Any()
+                        ? images.First().ImageUrl
+                        : "/images/products/no_image.jpg";
+                    }
+
+                    <img id="mainProductImage"
+                         src="@mainImage"
+                         class="main-product-image"
+                         alt="@Model.Name" />
+
+                    @if (images.Count > 1)
+                    {
+                        <div class="product-thumbnails">
+                            @foreach (var img in images)
+                            {
+                                <img src="@img.ImageUrl"
+                                     class="product-thumb"
+                                     onclick="setMainImage('@img.ImageUrl')" />
+                            }
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT: product info -->
+        <div class="col-md-6">
+            <div class="product-info">
+                <p>@Model.Name</p>
+                <p>@Model.Price</p>
+                @* <p>@Model.Size</p> *@
+                <p>@Model.Sex</p>
+                @if (Model.Stocks.Any(s => s.Quantity > 0))
+                {
+
+                    @foreach (var stock in Model.Stocks)
+                    {
+                        if (stock.Quantity > 0)
+                        {
+                            <span>@stock.Size </span>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <span class="badge bg-danger">Out of stock</span>
+                }
+
+                <br />
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+	function setMainImage(url) {
+		document.getElementById("mainProductImage").src = url;
+	}
+</script>

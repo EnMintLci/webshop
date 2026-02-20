@@ -14,7 +14,9 @@ public class ProductsController : Controller
     // /Products
     public IActionResult Index()
     {
-        var products = _context.Products.ToList();
+        var products = _context.Products
+            .Include(p => p.ProductImages)
+            .ToList();
         return View(products);
     }
 
@@ -24,6 +26,7 @@ public class ProductsController : Controller
     {
         var product = _context.Products
             .Include(p => p.Stocks)
+            .Include(p => p.ProductImages)
             .FirstOrDefault(p => p.Id == id);
         if (product == null)
             return NotFound();

@@ -13,6 +13,7 @@
         public string? ImageUrls { get; set; }
 
         public ICollection<ProductStock> Stocks { get; set; } = new List<ProductStock>();
+        public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
     }
 
     public enum Size

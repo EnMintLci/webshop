@@ -13,8 +13,16 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\css\\view_product.css",
+      "PackagePath": "staticwebassets\\css\\view_product.css"
+    },
+    {
       "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\images\\heros\\haromszog.jpg",
+      "PackagePath": "staticwebassets\\images\\heros\\haromszog.jpg"
     },
     {
       "Id": "C:\\Users\\lenovo\\source\\repos\\Webshop\\Webshop\\wwwroot\\images\\products\\labpic.jpg",

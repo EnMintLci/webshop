@@ -34,7 +34,18 @@ public class AdminProductsController : Controller
         return View(vm);
     }
 
-    
+    //// POST: /Admin/Products/Create
+    //[HttpPost("Create")]
+    //[ValidateAntiForgeryToken]
+    //public IActionResult Create(Product product)
+    //{
+    //    if (!ModelState.IsValid)
+    //        return View(product);
+
+    //    _context.Products.Add(product);
+    //    _context.SaveChanges();
+    //    return RedirectToAction(nameof(Index));
+    //}
 
     // GET: /Admin/Products/Edit/5
     [HttpGet("Edit/{id}")]
@@ -66,7 +77,18 @@ public class AdminProductsController : Controller
 
 
 
-   
+    //[HttpPost("Edit/{id}")]
+    //[ValidateAntiForgeryToken]
+    //public IActionResult Edit(Product product)
+    //{
+    //    if (!ModelState.IsValid)
+    //        return View(product);
+
+    //    _context.Products.Update(product);
+    //    _context.SaveChanges();
+    //    return RedirectToAction(nameof(Index));
+    //}
+
 
     // GET: /Admin/Products/Delete/5
     [HttpGet("Delete/{id}")]
@@ -109,7 +131,7 @@ public class AdminProductsController : Controller
             // EDIT
             product = _context.Products
                 .Include(p => p.Stocks)
-                .Include(p=>p.ProductImages)
+                .Include(p=>p.ImgURLs)
                 .First(p => p.Id == vm.Id);
         }
 
@@ -119,10 +141,10 @@ public class AdminProductsController : Controller
         product.Sex = vm.Sex;
         product.ImageUrls = vm.ImageUrls;
 
-        product.ProductImages.Clear();
-        foreach (var url in vm.ImageUrls.Split(";;"))
+       
+            foreach (var url in vm.ImageUrls.Split(";;"))
             {
-                product.ProductImages.Add(new ProductImage("/images/products/" + url));
+                product.ImgURLs.Add(new ProductImage("/images/products/" + url));
             }
         
 

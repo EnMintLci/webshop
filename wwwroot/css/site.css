@@ -20,11 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
-.product-card-img {
-    height: 350px;
-    object-fit: cover;
-    width: 100%;
-}
-.product-card {
-    height: 100%;
-}
+/*body {
+    padding-top: 72px;
+}*/
+
+
+
+
